@@ -55,7 +55,6 @@ function open_or_init_sqlite_db($db_filename, $init_sql_filename) {
 $db = open_or_init_sqlite_db('gallery.sqlite', "init/init.sql");
 $pos = strpos($_SERVER[ 'QUERY_STRING' ], '=');
 $picture_name = substr($_SERVER[ 'QUERY_STRING' ], $pos + 1, strlen($_SERVER[ 'QUERY_STRING' ]) - $pos);
-var_dump($picture_name);
 
 $pic_sql = 'SELECT pictures.id FROM pictures WHERE pictures.id = :picture_name';
 $pic_params = array(':picture_name' => substr($picture_name, 0, 1));
