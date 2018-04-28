@@ -91,7 +91,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
  <script>
     var img = document.getElementById('my-image');
     var timerDone = 0
-    startTimer(30,'demo');
+    startTimer(15,'demo');
     function startTimer(duration, display) {
         var timer = duration, seconds;
         setInterval(function () {
@@ -178,7 +178,7 @@ var column = row.selectAll(".square")
      return rgbToHex(color[0],color[1],color[2]);
    })
 	.attr("r", 1)
-  .transition().duration(30000)
+  .transition().duration(15000)
 	.attr("r", function(d) { return d.width/2; })
   .transition().duration(2000)
   .attr("cy", function(d) { return d.y + (Math.random() * 1000) - 25; })
