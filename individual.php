@@ -89,11 +89,6 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
   echo '<img src="uploads/pictures/' . reset($picture_id)["id"] . "." . reset($picture_ext)["file_ext"] . '" height="648" width="864">';
    ?>
  </div>
-
-
-
-
-
   </div>
 </body>
 </html>

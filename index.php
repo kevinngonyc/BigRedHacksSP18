@@ -139,7 +139,6 @@ if (isset($_FILES["user_picture"])) {
           $i = 0;
         }
       }
-
     ?>
   </div>
 </body>
