@@ -85,7 +85,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 
 <body id="page1">
   <center><div style='height:100px; margin-top:30px; font-size:50px; font-family:Palatino Linotype; opacity:0.7' id="demo"></div>
-  <div id="image">
+  <div id="image" hidden>
   <?php
   echo '<img id="my-image" src="uploads/pictures/' . reset($picture_id)["id"] . "." . reset($picture_ext)["file_ext"] . '" height="500" width="500">';
    ?>
@@ -93,7 +93,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
  </div>
 
 
-
+<center>
  <script>
     startTimer(59,'demo');
     function startTimer(duration, display) {
@@ -116,7 +116,6 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 <div id="grid"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-src="grid.js"
 
 <script>
 var img = document.getElementById('my-image');
@@ -182,7 +181,16 @@ var column = row.selectAll(".square")
 	.style("fill", function(d) {
      var color = canvas.getContext('2d').getImageData(d.x + d.width/2, d.y + d.width/2, 1, 1).data;
 
-     return rgb(color[0],color[1],color[2]); 
+     function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    function rgbToHex(r, g, b) {
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
+
+     return rgbToHex(color[0],color[1],color[2]);
    })
 	.on('click', function(d) {
        d.click ++;
@@ -193,7 +201,7 @@ var column = row.selectAll(".square")
     });
 
 </script>
-
+</center>
 
   </div>
 </body>
