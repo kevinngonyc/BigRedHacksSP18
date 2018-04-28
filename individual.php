@@ -57,7 +57,7 @@ $pos = strpos($_SERVER[ 'QUERY_STRING' ], '=');
 $picture_name = substr($_SERVER[ 'QUERY_STRING' ], $pos + 1, strlen($_SERVER[ 'QUERY_STRING' ]) - $pos);
 
 $pic_sql = 'SELECT pictures.id FROM pictures WHERE pictures.id = :picture_name';
-$pic_params = array(':picture_name' => substr($picture_name, 0, 1));
+$pic_params = array(':picture_name' => substr($picture_name, 0, strpos($picture_name, '.')));
 $picture_id = exec_sql_query($db, $pic_sql, $pic_params)->fetchAll(PDO::FETCH_ASSOC);
 $ext_sql = 'SELECT pictures.file_ext FROM pictures WHERE pictures.id = :picture_name';
 $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_ASSOC);
@@ -180,6 +180,8 @@ var column = row.selectAll(".square")
 	.attr("r", 1)
   .transition().duration(30000)
 	.attr("r", function(d) { return d.width/2; })
+  .transition().duration(2000)
+  .attr("cy", function(d) { return d.y + (Math.random() * 1000) - 25; })
 
 
 </script>
