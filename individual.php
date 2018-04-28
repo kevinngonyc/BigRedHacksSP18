@@ -53,11 +53,14 @@ function open_or_init_sqlite_db($db_filename, $init_sql_filename) {
   return NULL;
 }
 $db = open_or_init_sqlite_db('gallery.sqlite', "init/init.sql");
-$picture_name = $_GET['picture'];
-$pic_sql = 'SELECT pictures.id FROM pictures WHERE pictures.file_name = :picture_name';
-$pic_params = array(':picture_name' => $picture_name);
+$pos = strpos($_SERVER[ 'QUERY_STRING' ], '=');
+$picture_name = substr($_SERVER[ 'QUERY_STRING' ], $pos + 1, strlen($_SERVER[ 'QUERY_STRING' ]) - $pos);
+var_dump($picture_name);
+
+$pic_sql = 'SELECT pictures.id FROM pictures WHERE pictures.id = :picture_name';
+$pic_params = array(':picture_name' => substr($picture_name, 0, 1));
 $picture_id = exec_sql_query($db, $pic_sql, $pic_params)->fetchAll(PDO::FETCH_ASSOC);
-$ext_sql = 'SELECT pictures.file_ext FROM pictures WHERE pictures.file_name = :picture_name';
+$ext_sql = 'SELECT pictures.file_ext FROM pictures WHERE pictures.id = :picture_name';
 $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -76,8 +79,8 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 </head>
 
 <body id="page1">
-  <center><div style='height:100px; margin-top:30px; font-size:50px; font-family:Palatino Linotype; opacity:0.7' id="demo"></div>
-  <div id="image" hidden>
+  <center><div style="height:100px; margin-top:30px; font-size:50px; font-family:Palatino Linotype; opacity:0.7" id="demo"></div>
+  <div id="image">
   <?php
   echo '<img id="my-image" src="uploads/pictures/' . reset($picture_id)["id"] . "." . reset($picture_ext)["file_ext"] . '" height="500" width="500">';
    ?>
@@ -87,6 +90,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 
 <center>
  <script>
+    var img = document.getElementById('my-image');
     var timerDone = 0
     startTimer(30,'demo');
     function startTimer(duration, display) {
@@ -101,8 +105,8 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
             }
         }, 1000);
     }
-    if (timerDone > 0) {}
-      $("img").explode();
+    if (timerDone > 0) {
+      $img.explode();
     }
   </script>
 
@@ -178,15 +182,6 @@ var column = row.selectAll(".square")
   .transition().duration(30000)
 	.attr("r", function(d) { return d.width/2; })
 
-
-
-	.on('click', function(d) {
-       d.click ++;
-       if ((d.click)%4 == 0 ) { d3.select(this).style("fill","#fff"); }
-	   if ((d.click)%4 == 1 ) { d3.select(this).style("fill","#2C93E8"); }
-	   if ((d.click)%4 == 2 ) { d3.select(this).style("fill","#F56C4E"); }
-	   if ((d.click)%4 == 3 ) { d3.select(this).style("fill","#838690"); }
-    });
 
 </script>
 </center>
