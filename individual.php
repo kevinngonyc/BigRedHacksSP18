@@ -455,6 +455,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 
 <center>
  <script>
+    var timerDone = 0
     startTimer(59,'demo');
     function startTimer(duration, display) {
 
@@ -467,6 +468,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
             document.getElementById(display).innerHTML = seconds + 's';
 
             if (--timer < 0) {
+                timerDone = 1;
                 timer = duration;
             }
         }, 1000);
