@@ -131,7 +131,7 @@ if (isset($_FILES["user_picture"])) {
       echo "<tr>";
       foreach($records as $record){
         if ($i < 2) {
-          echo '<td><a href="individual.php?picture=' . $record["id"] .  "." . $record["file_ext"] . '"><img src="uploads/pictures/"' . $record["id"] .  "." . $record["file_ext"] . "\" height=\"486\" width=\"648\" hspace=\"5\"><a></td>";
+          echo '<td><a href="individual.php?picture=' . $record["id"] .  "." . $record["file_ext"] . '"><img src="uploads/pictures/' . $record["id"] .  "." . $record["file_ext"] . "\" height=\"486\" width=\"648\" hspace=\"5\"></a></td>";
           $i ++;
         }
         elseif ($i == 2) {
