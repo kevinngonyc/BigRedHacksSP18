@@ -105,7 +105,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
         }, 1000);
     }
     if (timerDone > 0) {
-      $img.explode();
+      $("img").explode();
     }
   </script>
 
