@@ -182,6 +182,8 @@ var column = row.selectAll(".square")
 	.attr("r", function(d) { return d.width/2; })
   .transition().duration(2000)
   .attr("cy", function(d) { return d.y + (Math.random() * 1000) - 25; })
+  .transition().duration(2000)
+  .attr("cy", 600)
 
 
 </script>
