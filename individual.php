@@ -88,7 +88,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
 <center>
  <script>
     var timerDone = 0
-    startTimer(59,'demo');
+    startTimer(30,'demo');
     function startTimer(duration, display) {
         var timer = duration, seconds;
         setInterval(function () {
@@ -97,7 +97,7 @@ $picture_ext = exec_sql_query($db, $ext_sql, $pic_params)->fetchAll(PDO::FETCH_A
             document.getElementById(display).innerHTML = seconds + 's';
             if (--timer < 0) {
                 timerDone = 1;
-                timer = duration;
+                timer = 0;
             }
         }, 1000);
     }
@@ -163,8 +163,7 @@ var column = row.selectAll(".square")
 	.attr("class","dot")
 	.attr("cx", function(d) { return d.x + d.width/2; })
 	.attr("cy", function(d) { return d.y + d.width/2; })
-	.attr("r", function(d) { return d.width/3; })
-	.style("fill", function(d) {
+  .style("fill", function(d) {
      var color = canvas.getContext('2d').getImageData(d.x + d.width/2, d.y + d.width/2, 1, 1).data;
      function componentToHex(c) {
     var hex = c.toString(16);
@@ -175,6 +174,12 @@ var column = row.selectAll(".square")
     }
      return rgbToHex(color[0],color[1],color[2]);
    })
+	.attr("r", 1)
+  .transition().duration(30000)
+	.attr("r", function(d) { return d.width/2; })
+
+
+
 	.on('click', function(d) {
        d.click ++;
        if ((d.click)%4 == 0 ) { d3.select(this).style("fill","#fff"); }
