@@ -122,7 +122,7 @@ if (isset($_FILES["user_picture"])) {
           <input name="submit_upload" type="submit"></input>
       </ul>
       </form>
-  </div>
+    </div>
 
   <div>
     <?php
@@ -131,8 +131,7 @@ if (isset($_FILES["user_picture"])) {
       echo "<tr>";
       foreach($records as $record){
         if ($i < 2) {
-          echo '<td><img src="uploads/pictures/'. $record["id"] . "." . $record["file_ext"] . "\" height=\"486\" width=\"648\" hspace=\"5\"></td>";
-          echo "<td><a href=individual.php?picture=" . $record["file_name"] . "></a></td>";
+          echo '<td><a href="individual.php?picture=' . $record["id"] .  "." . $record["file_ext"] . '"><img src="uploads/pictures/"' . $record["id"] .  "." . $record["file_ext"] . "\" height=\"486\" width=\"648\" hspace=\"5\"><a></td>";
           $i ++;
         }
         elseif ($i == 2) {
@@ -143,5 +142,5 @@ if (isset($_FILES["user_picture"])) {
 
     ?>
   </div>
-
+</body>
 </html>
